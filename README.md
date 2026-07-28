@@ -1,99 +1,217 @@
 # Ask Annie
 
-> **Your trusted AI companion for safer digital decisions.**
+> <div align="center">
 
-Ask Annie is an AI-powered digital safety companion designed to help people make confident, informed decisions before they click, reply, pay or share personal information online.
+# 🛡️ Ask Annie
+
+### Your trusted AI companion for safer digital decisions.
+
+Helping people recognise scams, understand suspicious messages, and navigate the digital world with confidence.
+
+---
+
+**Status:** 🚧 Early Development (Version 0.1 MVP)
+
+</div>
+
+---
+
+# Why Ask Annie Exists
+
+Every day, millions of people receive suspicious emails, text messages, WhatsApp messages, phone calls and social media messages.
+
+Many of them are sophisticated.
+
+Many appear genuine.
+
+Many people don't know who to trust.
+
+Ask Annie exists to give people a calm, trustworthy second opinion before they click, reply, pay money or share personal information.
 
 Our mission is simple:
 
-> **Help people stay safe in an increasingly complex digital world through trustworthy, accessible AI.**
+> **Help people make safer digital decisions through accessible, trustworthy AI.**
 
 ---
 
-## Why Ask Annie?
+# The Problem
 
-Millions of people receive suspicious emails, text messages, phone calls and social media messages every day. Many are unsure whether something is genuine, and existing cybersecurity tools are often too technical or overwhelming.
+Digital scams are becoming increasingly convincing.
 
-Ask Annie aims to bridge that gap by providing calm, plain-English guidance that anyone can understand.
+Traditional security tools focus on blocking threats.
 
-Instead of creating fear, Ask Annie builds confidence.
+Ask Annie focuses on helping people understand them.
 
----
+Many people:
 
-## Core Principles
+- aren't confident with technology
+- feel embarrassed asking for help
+- don't know what warning signs to look for
+- panic when a message appears urgent
+- don't know who to trust
 
-- 🤝 Trust before technology
-- 💬 Plain English, never jargon
-- ♿ Accessibility first
-- 🔒 Privacy by design
-- 🤖 Responsible AI that explains its reasoning
-- ❤️ Designed for everyone, regardless of technical ability
-
----
-
-## Planned Features
-
-- Screenshot analysis
-- Scam message detection
-- Email analysis
-- Website safety checks
-- QR code analysis
-- AI-generated explanation of potential risks
-- Simple guidance on what to do next
-- Voice-friendly interaction
-- Trusted contact support (future)
+Ask Annie bridges that gap.
 
 ---
 
-## Technology Stack
+# Our Solution
 
-- Replit
-- OpenAI API
-- GitHub
-- Modern Web Framework (TBD)
-- Custom Domain
+Ask Annie combines artificial intelligence with clear human explanations.
 
----
+Instead of simply saying:
 
-## Project Status
+> "This looks suspicious."
 
-🚧 **Early Development**
+Annie explains:
 
-The project is currently in active development as we build the first pilot release.
+- Why it looks suspicious.
+- Which warning signs were detected.
+- What the user should do next.
+- When uncertainty still exists.
 
-The initial version focuses on helping users determine whether messages, emails and websites are genuine using accessible AI guidance.
+Our goal isn't to replace human judgement.
 
----
-
-## Roadmap
-
-- [ ] Company Foundation
-- [ ] Product Requirements Document
-- [ ] System Architecture
-- [ ] Brand Identity
-- [ ] Replit MVP
-- [ ] AI Integration
-- [ ] User Testing
-- [ ] Public Beta
+Our goal is to improve it.
 
 ---
 
-## Vision
+# Core Principles
 
-We believe AI should make people feel **more confident**, not more confused.
+Everything we build follows these principles.
 
-Our long-term vision is for Ask Annie to become a trusted digital companion that helps people safely navigate an increasingly AI-driven world.
+✅ Calm before clever
+
+✅ Accessibility first
+
+✅ Privacy by design
+
+✅ Explain the reasoning
+
+✅ Never shame the user
+
+✅ Encourage independent verification
+
+✅ Guidance, not guarantees
 
 ---
 
-## Contributing
+# Version 0.1 MVP
 
-Ask Annie is currently a founder-led project under active development.
+The first version of Ask Annie allows users to:
 
-Community contributions and feedback will be welcomed as the project matures.
+- Paste suspicious text.
+- Upload screenshots or photos.
+- Receive an AI-powered risk assessment.
+- Understand why the content may be risky.
+- Receive clear next-step guidance.
 
 ---
 
-## License
+# Technology
+
+Current technology stack:
+
+| Layer | Technology |
+|--------|------------|
+| Development | VS Code |
+| Source Control | GitHub |
+| AI Assisted Development | Replit Agent |
+| AI Review | Codex |
+| AI Analysis | OpenAI API |
+| Deployment | Replit |
+| Language | TypeScript |
+| Architecture | Markdown + ADRs |
+
+---
+
+# Accessibility
+
+Accessibility is a core product requirement, not an afterthought.
+
+The application is being designed to support:
+
+- WCAG 2.2 AA
+- Screen readers
+- Keyboard navigation
+- High contrast
+- Plain English
+- Large touch targets
+- Older users
+- Low digital confidence
+
+---
+
+# Documentation
+
+Project documentation can be found in:
+
+```
+docs/
+```
+
+Including:
+
+- Architecture
+- Security
+- Accessibility
+- Responsible AI
+- Design Principles
+- Architecture Decision Records (ADRs)
+
+---
+
+# Project Roadmap
+
+### Phase 1
+
+✅ Founder documentation
+
+⬜ MVP
+
+⬜ Private testing
+
+---
+
+### Phase 2
+
+⬜ Image analysis
+
+⬜ Voice interaction
+
+⬜ Mobile optimisation
+
+⬜ Trusted contact support
+
+---
+
+### Phase 3
+
+⬜ Community rollout
+
+⬜ Charity partnerships
+
+⬜ Enterprise offering
+
+⬜ Public launch
+
+---
+
+# Contributing
+
+Ask Annie is currently under active development.
+
+Contribution guidelines will be published before the first public beta.
+
+---
+
+# License
 
 MIT License
+
+---
+
+<div align="center">
+
+Built with ❤️ to help people stay safe online.
+
+</div>
