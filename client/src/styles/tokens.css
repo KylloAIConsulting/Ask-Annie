@@ -1,0 +1,71 @@
+:root {
+  /* ── Brand colours ─────────────────────────────────────────────────────── */
+  --color-annie-teal: #176b68;
+  --color-deep-teal: #0e4544;
+  --color-warm-white: #faf9f6;
+  --color-white: #ffffff;
+  --color-charcoal: #202827;
+  --color-slate: #53605e;
+  --color-soft-grey: #d8dedc;
+
+  /* ── Risk colours (always paired with text label + icon, never used alone) */
+  --color-risk-lower: #2e7d5b;
+  --color-risk-concerning: #b26a00;
+  --color-risk-high: #b33a3a;
+
+  /* ── Typography ─────────────────────────────────────────────────────────── */
+  --font-family: 'Inter', Arial, Helvetica, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600; /* 650 is not used — 600 is the correct SemiBold */
+  --font-weight-bold: 700;
+
+  /* Type scale — mobile-first, desktop values via clamp() */
+  --font-size-display: clamp(36px, 5vw, 48px);
+  --font-size-page-heading: clamp(30px, 4vw, 36px);
+  --font-size-section-heading: 24px;
+  --font-size-card-heading: 20px;
+  --font-size-body-large: 18px;
+  --font-size-body: 16px;
+  --font-size-supporting: 14px;
+
+  --line-height-heading: 1.2;
+  --line-height-body: 1.6;
+
+  /* ── Spacing (8 px grid) ─────────────────────────────────────────────────  */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  /* ── Layout ──────────────────────────────────────────────────────────────  */
+  --max-width-journey: 720px;
+  --max-width-info: 960px;
+  --page-padding: 16px; /* mobile default */
+
+  /* ── Buttons ─────────────────────────────────────────────────────────────  */
+  --button-height-min: 48px;
+  --button-border-radius: 10px;
+
+  /* ── Cards ───────────────────────────────────────────────────────────────  */
+  --card-border-radius: 14px;
+  --card-padding: 24px;
+  --card-border: 1px solid var(--color-soft-grey);
+  --card-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Responsive padding ─────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  :root {
+    --page-padding: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-padding: 32px;
+  }
+}

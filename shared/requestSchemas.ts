@@ -1,0 +1,44 @@
+import { z } from 'zod';
+
+/**
+ * Request schema for POST /api/analyse.
+ * Text and image are both optional individually — the route handler
+ * enforces that at least one must be present (image arrives via multipart).
+ */
+export const AnalyseTextSchema = z.object({
+  text: z.string().min(1).max(10000).optional(),
+  context: z.string().max(500).optional(),
+});
+
+export type AnalyseText = z.infer<typeof AnalyseTextSchema>;
+
+/**
+ * Feedback answer options — maps to the three buttons on the Feedback screen.
+ */
+export const FeedbackAnswerSchema = z.enum(['yes', 'not_sure', 'no']);
+
+/**
+ * Optional outcome options — maps to the "What did you decide to do?" question.
+ */
+export const FeedbackOutcomeSchema = z.enum([
+  'stopped_and_checked',
+  'decided_not_to_continue',
+  'continued_after_verifying',
+  'still_unsure',
+  'prefer_not_to_say',
+]);
+
+/**
+ * Request schema for POST /api/feedback.
+ * A selected answer is required. Written feedback and outcome are optional.
+ * Selecting "Skip" on the client must NOT call this endpoint.
+ */
+export const FeedbackRequestSchema = z.object({
+  answer: FeedbackAnswerSchema,
+  writtenFeedback: z.string().max(1000).optional(),
+  outcome: FeedbackOutcomeSchema.optional(),
+});
+
+export type FeedbackRequest = z.infer<typeof FeedbackRequestSchema>;
+export type FeedbackAnswer = z.infer<typeof FeedbackAnswerSchema>;
+export type FeedbackOutcome = z.infer<typeof FeedbackOutcomeSchema>;
