@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useCallback, useReducer, useState } from 'react';
 import {
   appReducer,
   initialAppState,
@@ -10,6 +10,10 @@ import Header from './components/Header/Header';
 import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen';
 import SubmitScreen from './screens/SubmitScreen/SubmitScreen';
 import type { SubmitDraft } from './screens/SubmitScreen/SubmitScreen';
+import AnalysingScreen from './screens/AnalysingScreen/AnalysingScreen';
+import { analyseText, analyseImage } from './api/analyse';
+import type { AnnieResponse } from './types/annie';
+import { DEV_USE_FIXTURE, DEV_FIXTURE_LEVEL } from './lib/fixtureMode';
 
 // Re-export Screen so downstream modules can import from a single location.
 export type { Screen };
@@ -21,6 +25,40 @@ const App: React.FC = () => {
   const navigate = (screen: Screen): void => {
     dispatch({ type: 'NAVIGATE', screen });
   };
+
+  // ---------------------------------------------------------------------------
+  // Analysis function
+  //
+  // Memoised so AnalysingScreen's useEffect does not restart when App
+  // re-renders for unrelated reasons.  The function only gets a new identity
+  // after SET_SUBMISSION changes the submitted text, file, or context.
+  // ---------------------------------------------------------------------------
+
+  const analyseForSubmission = useCallback(
+    async (signal: AbortSignal): Promise<AnnieResponse> => {
+      // Fixture mode — development builds only, excluded from production by
+      // Vite's dead-code elimination of import.meta.env.DEV === false branches.
+      if (DEV_USE_FIXTURE) {
+        const { selectFixture, resolveFixture } = await import('./api/fixture');
+        const fixture = selectFixture(DEV_FIXTURE_LEVEL);
+        return resolveFixture(fixture, 1500, signal);
+      }
+      if (state.submittedFile !== null) {
+        return analyseImage(
+          state.submittedFile,
+          state.submittedContext || undefined,
+          signal,
+        );
+      }
+      return analyseText(
+        state.submittedText,
+        state.submittedContext || undefined,
+        signal,
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state.submittedText, state.submittedFile, state.submittedContext],
+  );
 
   // ---------------------------------------------------------------------------
   // Screen dispatch
@@ -52,18 +90,20 @@ const App: React.FC = () => {
                 file: draft.mode === 'image' ? draft.file : null,
                 context: draft.context,
               });
-              navigate('analysing'); // TODO T5.3 — replace placeholder with <AnalysingScreen>
+              navigate('analysing');
             }}
           />
         );
 
       case 'analysing':
-        // TODO T5.1 — replace with <AnalysingScreen ... />
         return (
-          <div data-testid="screen-analysing">
-            <h1>Annie is checking for warning signs</h1>
-            <p>T5.1 placeholder</p>
-          </div>
+          <AnalysingScreen
+            analyse={analyseForSubmission}
+            onSuccess={(result) =>
+              dispatch({ type: 'ANALYSIS_SUCCESS', result })
+            }
+            onCancel={() => navigate('submit')}
+          />
         );
 
       case 'results':

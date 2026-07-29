@@ -4,6 +4,7 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "allowImportingTsExtensions": false,
-    "noEmit": false
+    "noEmit": false,
+    "isolatedModules": true
   }
 }

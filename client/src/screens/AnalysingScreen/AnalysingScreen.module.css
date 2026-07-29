@@ -1,0 +1,135 @@
+/* ── Screen shell ────────────────────────────────────────────────────────── */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-8);
+  min-height: 50vh;
+  text-align: center;
+}
+
+/* ── Shared content wrapper ──────────────────────────────────────────────── */
+
+.loadingContent,
+.errorContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 480px;
+  width: 100%;
+}
+
+/* ── Spinner ─────────────────────────────────────────────────────────────── */
+
+.spinner {
+  width: 56px;
+  height: 56px;
+  border: 4px solid var(--color-soft-grey);
+  border-top-color: var(--color-annie-teal);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border-color: var(--color-soft-grey);
+    border-top-color: var(--color-annie-teal);
+  }
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+
+.heading {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-section-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-heading);
+}
+
+.supporting {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-slate);
+  line-height: var(--line-height-body);
+}
+
+/* ── Actions ─────────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  padding-inline: var(--space-5);
+  background-color: var(--color-annie-teal);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.1s ease;
+}
+
+.primaryButton:hover {
+  background-color: var(--color-deep-teal);
+}
+
+.primaryButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton {
+    transition: none;
+  }
+}
+
+.cancelButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  padding-inline: var(--space-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-annie-teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cancelButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
