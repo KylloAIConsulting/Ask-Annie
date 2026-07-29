@@ -81,3 +81,4 @@ npm run typecheck --workspace=client
 - Canonical risk values: `LOWER_RISK`, `CONCERNING`, `HIGH_RISK`
 - `USE_MOCK_AI=true` for development; mock keys `__MOCK_CONCERNING__` / `__MOCK_HIGH_RISK__` trigger non-default mock responses
 - No `SESSION_SECRET` in Sprint 1 — MVP has no auth
+- Long documents must be split into numbered parts of approximately equal length (e.g. Part 1 of 4). Never allow a response to be truncated by the context window. Stop at the end of a logical section and wait for "continue" if needed.
