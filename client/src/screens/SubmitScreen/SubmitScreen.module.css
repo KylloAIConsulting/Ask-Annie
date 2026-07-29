@@ -154,7 +154,7 @@
   margin: 0;
   font-family: var(--font-family);
   font-size: var(--font-size-supporting);
-  color: var(--color-high-risk); /* design-token red */
+  color: var(--color-risk-high);
 }
 
 /* ── Selected file info ──────────────────────────────────────────────────── */

@@ -1,0 +1,143 @@
+Sprint 2 – T8 Integration, Polish and Completion
+
+Complete the final Sprint 2 integration and polish package (T8) using the approved Sprint 2 plan, current codebase, and completed implementations as the authoritative sources.
+
+Do not add new product features.
+
+1. End-to-end integration review
+
+Verify the complete journey:
+
+Welcome → Submit → Analysing → Results → Feedback → Welcome
+
+Confirm:
+
+text submission works
+image submission works
+fixture mode works
+live API mode is wired correctly
+analysis success reaches Results
+analysis error, timeout, retry, cancellation and unmount behaviour work correctly
+Results actions navigate correctly
+Feedback success, failure, retry and skip behaviours work
+RESET_SESSION clears all previous submission, analysis and feedback state
+starting a second session does not display stale data
+2. Navigation and state audit
+
+Review all reducer actions and screen transitions.
+
+Check for:
+
+unreachable screens
+invalid state combinations
+stale state after reset
+duplicate navigation logic
+placeholders left from Sprint 2
+TODO or FIXME comments
+dead imports
+unused components
+duplicated utilities
+inconsistent error handling
+
+Fix genuine issues found, but do not refactor working code merely for preference.
+
+3. Accessibility audit
+
+Run and review accessibility coverage across the complete journey.
+
+Verify:
+
+heading hierarchy
+form labels
+error associations
+live regions
+focus management after navigation and state changes
+keyboard-only operation
+controls do not rely on colour alone
+reduced-motion support
+conditional sections are omitted rather than visually hidden when absent
+axe tests remain clean
+4. Responsive and visual consistency audit
+
+Review all Sprint 2 screens at common mobile and desktop widths.
+
+Verify:
+
+no horizontal overflow
+action buttons remain usable
+cards and sections resize correctly
+long filenames and long AI responses wrap safely
+loading, error, success and confirmation states remain readable
+design tokens are used consistently
+no unnecessary hard-coded colours, spacing or typography values
+5. Integration tests
+
+Add or expand tests covering the complete application journey rather than only isolated screens.
+
+Include at minimum:
+
+text submission through Results
+image submission through Results
+analysis error and retry
+timeout and retry
+cancel back to Submit
+Results to Feedback
+feedback completion resets to Welcome
+feedback skip resets to Welcome
+second session starts without stale data
+fixture-mode journey
+accessibility checks on major application states
+
+Do not duplicate existing unit tests unnecessarily.
+
+6. Documentation and engineering report
+
+Update or create the appropriate Sprint 2 engineering documentation containing:
+
+completed scope
+architecture changes
+shared types and configuration added
+screen flow
+fixture versus live API behaviour
+accessibility work
+test totals
+known limitations
+deferred work
+Sprint 2 retrospective
+recommendations for Sprint 3
+
+Keep documentation accurate to the implemented code.
+
+Quality gates
+
+Run:
+
+full client test suite
+client TypeScript typecheck
+server test suite, if present
+server TypeScript typecheck, if configured
+full repository build, if a build command exists
+
+Resolve all failures and warnings introduced by Sprint 2.
+
+Commit
+
+Create one commit:
+
+chore(sprint): complete Sprint 2 integration and engineering review
+Report only
+
+When complete, stop and report:
+
+Files changed
+Integration issues found and fixes made
+Tests run and results
+Client and server typecheck results
+Build result
+Final Sprint 2 test total
+Documentation created or updated
+Known limitations or deferred items
+Commit hash
+Working-tree status
+
+Do not begin Sprint 3. Do not push to GitHub. Stop for final Sprint 2 review.

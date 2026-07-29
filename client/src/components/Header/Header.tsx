@@ -9,10 +9,7 @@ type HeaderProps = {
   onNavigate: (screen: Screen) => void;
   /**
    * Called when the user activates "How it works".
-   *
-   * Contract for T1.3 shell: App passes () => onNavigate('welcome').
-   * T3.1 will replace this with a callback that expands the explanation
-   * panel on the Welcome screen.
+   * Navigates to the welcome screen and opens the explanation panel.
    */
   onHowItWorks: () => void;
 };
@@ -51,9 +48,6 @@ const Header: React.FC<HeaderProps> = ({ currentScreen, onNavigate, onHowItWorks
               </button>
             </li>
             <li>
-              {/* TODO T3.1 — onHowItWorks will open the explanation panel on
-                  the Welcome screen instead of navigating. The prop contract is
-                  stable; only the callback passed by App changes. */}
               <button
                 type="button"
                 className={styles.navButton}

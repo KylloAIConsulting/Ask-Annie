@@ -5,10 +5,7 @@ import type { AnnieResponse } from '../types/annie';
 // ---------------------------------------------------------------------------
 
 /**
- * All screens in the five-step user journey.
- * Each screen is owned by a single component introduced in the tasks listed
- * in the TODO comments inside App.tsx.
- */
+ * All screens in the five-step user journey. */
 export type Screen =
   | 'welcome'
   | 'submit'

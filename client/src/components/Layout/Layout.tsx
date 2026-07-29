@@ -6,8 +6,8 @@ type LayoutProps = {
   children: React.ReactNode;
   /**
    * Optional header rendered between the skip link and the main container.
-   * T1.3 passes <Header> here so the skip link remains the first focusable
-   * element in the document regardless of which component is in the header.
+   * Passed by App so the skip link remains the first focusable element in
+   * the document regardless of which component is in the header slot.
    */
   header?: React.ReactNode;
 };
@@ -19,8 +19,6 @@ type LayoutProps = {
  *  - Skip-to-content link for keyboard users (visible on :focus, offscreen otherwise)
  *  - Centred single-column container (max-width 720 px, responsive horizontal padding)
  *  - The <main id="main-content"> landmark that the skip link targets
- *
- * T1.3 will add <Header> above the container.
  */
 const Layout: React.FC<LayoutProps> = ({ children, header }) => {
   return (

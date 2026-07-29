@@ -2,9 +2,8 @@
  * Development-only fixture data for all three Annie risk levels.
  *
  * This module must NOT be imported directly in production code.
- * T5.3 will gate its use behind:
- *   import.meta.env.DEV && import.meta.env.VITE_USE_FIXTURE === 'true'
- * and will perform a dynamic import so it is excluded from production bundles.
+ * App.tsx gates its use behind DEV_USE_FIXTURE (from lib/fixtureMode.ts) and
+ * performs a dynamic import so it is excluded from production bundles.
  */
 import { AnnieResponseSchema, type AnnieResponse, type RiskLevel } from '@shared/annieResponse';
 

@@ -3,14 +3,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
-/**
- * T1.1 — App render tests.
- *
- * These tests verify that the App renders correctly and that the screen
- * state machine dispatches correctly from the temporary slot buttons.
- * Each slot will be replaced by a real screen component in the task
- * noted in its TODO comment; this test file will be updated at that point.
- */
 describe('App', () => {
   it('renders without crashing', () => {
     render(<App />);

@@ -11,7 +11,7 @@ import {
 } from '@shared/uploadConfig';
 
 // ---------------------------------------------------------------------------
-// Draft types — exported for use by App and AnalysingScreen (T5.1)
+// Draft types — exported for use by App
 // ---------------------------------------------------------------------------
 
 export type TextDraft = {
@@ -55,7 +55,7 @@ type SubmitScreenProps = {
   onNavigate: (screen: Screen) => void;
   /**
    * Called with the validated draft when the user activates "Check with Annie".
-   * T5.3 (App.tsx) dispatches SET_SUBMISSION and navigates to 'analysing'.
+   * App dispatches SET_SUBMISSION and navigates to 'analysing'.
    * This component never calls the analyse API.
    */
   onSubmit: (draft: SubmitDraft) => void;

@@ -64,10 +64,6 @@ const App: React.FC = () => {
 
   // ---------------------------------------------------------------------------
   // Screen dispatch
-  //
-  // Each case renders a temporary labelled slot until the real screen component
-  // is introduced by the task noted in the TODO comment.  The data-testid
-  // attribute makes each slot independently addressable in tests.
   // ---------------------------------------------------------------------------
 
   const renderScreen = (): React.ReactElement => {

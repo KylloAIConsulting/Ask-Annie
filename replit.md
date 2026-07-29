@@ -71,7 +71,7 @@ npm run typecheck --workspace=client
 | Sprint | Scope | Status |
 |--------|-------|--------|
 | Sprint 1 | Project scaffold, shared schemas, server skeleton, test infrastructure | ✅ Complete |
-| Sprint 2 | React UI screens (Input, Loading, Result, Feedback) | ⏳ Pending |
+| Sprint 2 | React UI screens (Welcome, Submit, Analysing, Results, Feedback) | ✅ Complete |
 | Sprint 3 | OpenAI integration, image processing | ⏳ Pending |
 | Sprint 4 | Polish, accessibility audit, deployment | ⏳ Pending |
 
