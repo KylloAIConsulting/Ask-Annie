@@ -1,0 +1,227 @@
+Sprint 2 Plan Review and Conditional Approval
+
+The overall Sprint 2 plan is directionally approved, but the following corrections are mandatory before implementation.
+
+Do not implement the entire sprint. After recording the corrections below, implement T1.1 only and then stop for review.
+
+-------------------------------------------------------
+MANDATORY PLAN CORRECTIONS
+-------------------------------------------------------
+
+1. T1.1 — Screen availability and testability
+
+The five real screen components do not yet exist, so App.tsx must not import nonexistent components.
+
+Implement the screen state contract in a way that compiles independently.
+
+Preferred approach:
+
+- Define a strongly typed Screen union.
+- Define AppState and AppAction types.
+- Use a pure reducer for navigation, submission state, analysis success, analysis failure and session reset.
+- Render clearly labelled temporary screen slots inside App.tsx until the real screens replace them in later tasks.
+- Do not create full screen components during T1.1.
+- Add a TODO identifying exactly which later task replaces each temporary slot.
+
+Test the reducer directly rather than attempting to inspect nonexistent screen props.
+
+2. Remove unavailable navigation and actions
+
+Do not render non-functional or disabled future features in the Sprint 2 interface.
+
+Remove from Sprint 2 scope:
+
+- Disabled Privacy navigation link
+- Disabled “Save this advice” button
+- Disabled “Share with someone I trust” button
+
+Only visible, usable actions should appear in the MVP.
+
+The Header should therefore contain:
+
+- Annie wordmark
+- Home
+- How it works
+
+Privacy information already present within the user journey may remain as content. A dedicated Privacy page can be introduced when it is functional.
+
+3. File-upload accessibility
+
+Do not make the drop zone a role="button" containing a separate button.
+
+Use:
+
+- A native hidden or visually hidden file input
+- A properly associated label styled as the “Choose an image” control
+- A non-interactive drop target that supports drag-and-drop
+- Clear keyboard access through the native labelled input
+
+Do not add capture="environment" to the main file input in Sprint 2. It may cause inconsistent mobile behaviour. A dedicated camera action can be designed separately in a future sprint.
+
+4. SubmitScreen transition state
+
+Remove the proposed temporary “Checking…” state from SubmitScreen unless an asynchronous operation actually occurs before navigation.
+
+On successful validation:
+
+- Store submission state
+- Navigate immediately to AnalysingScreen
+- AnalysingScreen owns all busy, loading and cancellation states
+
+Prevent duplicate submission through normal form handling, but do not add an artificial loading state that is unlikely to render.
+
+5. Fixture safety and selection
+
+The fixture module must not be statically imported into the normal production execution path.
+
+Requirements:
+
+- Fixture mode must require both import.meta.env.DEV and VITE_USE_FIXTURE === 'true'.
+- Load the fixture module using a development-only dynamic import.
+- Define a deterministic mechanism for selecting LOWER_RISK, CONCERNING or HIGH_RISK during development.
+- Default safely to LOWER_RISK when no development fixture level is supplied.
+- Validate any supplied fixture-level value before using it.
+- Production builds must always use the real API path.
+
+Update the task plan and tests accordingly.
+
+6. AnalysingScreen abort reasons
+
+Cancellation, timeout and unmount cleanup must not all be treated as the same AbortError.
+
+Track the request termination reason explicitly:
+
+- user_cancelled
+- timed_out
+- component_unmounted
+
+Expected behaviour:
+
+- user_cancelled → return to SubmitScreen without an error
+- timed_out → display timeout state
+- component_unmounted → perform cleanup without any state update
+- genuine request/network failure → display general error state
+
+“Try again” should increment an attempt key or call an explicit request function. Do not rely on vaguely “remounting the screen.”
+
+7. FeedbackScreen conditional content
+
+Do not keep focusable follow-up inputs mounted inside an aria-hidden container.
+
+Before an answer is selected:
+
+- Follow-up controls must not be present in the DOM.
+
+After an answer is selected:
+
+- Conditionally render the follow-up controls.
+- Announce their appearance using an appropriate polite live region.
+- Do not rely on a max-height transition to or from auto.
+- Under prefers-reduced-motion, no reveal animation should occur.
+
+8. Feedback completion flow
+
+Correct the current contradiction.
+
+Required flow:
+
+Send feedback success:
+- Replace the form with the confirmation state.
+- Do not reset App state yet.
+
+Skip:
+- Do not call submitFeedback.
+- Replace the form with the same confirmation state.
+- Do not reset App state yet.
+
+Return home:
+- Call onReset.
+- Clear all session state.
+- Navigate to WelcomeScreen.
+
+Do not define onFeedbackComplete as an immediate reset-and-navigate callback.
+
+The confirmation heading must use tabIndex={-1} before programmatic focus is applied.
+
+9. Documentation conflicts
+
+Do not leave known documentation drift unresolved.
+
+Before Sprint 2 feature implementation proceeds:
+
+- Update PRODUCT_REQUIREMENTS.md so its risk terminology matches the authoritative schema and screen specification:
+  Lower Risk / Concerning / High Risk.
+- Correct the design-system explanation around font weight. CSS supports numeric font-weight values, but 600 is the chosen supported design token for this project. Do not state that 650 is universally invalid CSS.
+
+Make these documentation corrections in a separate documentation commit.
+
+10. Sprint closure governance
+
+T8 must not automatically close Sprint 2.
+
+T8 should:
+
+- Run the integration checklist
+- Fix defects
+- Run all tests and typechecks
+- Produce the Sprint 2 engineering report
+- Draft the Sprint 2 retrospective
+- Report the final working-tree status
+- Stop and wait for Product Owner approval
+
+Only after explicit approval may Replit:
+
+- Mark Sprint 2 complete in replit.md
+- Finalise the retrospective
+- Create the Sprint 2 checkpoint/tag
+
+11. Execution model
+
+Do not start tasks in parallel.
+
+This repository is being implemented by one AI engineering agent and reviewed one checkpoint at a time.
+
+Complete one approved task, commit it, report it, and wait for approval before starting the next task.
+
+-------------------------------------------------------
+IMPLEMENT T1.1 ONLY
+-------------------------------------------------------
+
+After updating the written plan to reflect the corrections above, implement T1.1 only.
+
+T1.1 requirements:
+
+- Strongly typed Screen union
+- Strongly typed AppState
+- Pure reducer with explicit actions
+- Initial state
+- Navigation action
+- Submission-state action
+- Analysis-success action
+- Analysis-error action
+- Reset-session action
+- Temporary screen slots that compile without importing future components
+- No any types
+- Reducer unit tests
+- App render test
+- Client typecheck
+- Full client test suite
+- No unrelated changes
+
+Commit message:
+
+feat(app): add typed screen state machine and session reducer
+
+When complete, report:
+
+1. Files changed
+2. State and action definitions
+3. Reducer behaviour
+4. Temporary-slot approach
+5. Tests added
+6. Test results
+7. Typecheck result
+8. Commit hash
+9. Working-tree status
+
+Then stop and wait for approval before T1.2 or any other Sprint 2 task.
