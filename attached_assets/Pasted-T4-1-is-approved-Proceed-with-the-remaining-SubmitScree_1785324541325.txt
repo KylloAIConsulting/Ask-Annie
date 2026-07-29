@@ -1,0 +1,206 @@
+T4.1 is approved.
+
+Proceed with the remaining SubmitScreen package only: T4.2–T4.5.
+
+Important: T4.1 already implemented more functionality than the original plan, including:
+- separate text and image modes
+- typed SubmitDraft union
+- shared text/context length constants
+- native image file input
+- selected filename display
+- disabled-state validation
+- draft callback handling
+- 23 SubmitScreen tests
+
+Do not discard, rewrite, or duplicate working functionality merely to match the older task breakdown. Review the current implementation first, identify only the remaining gaps against the requirements below, and make the smallest safe changes needed.
+
+Keep this credit-efficient:
+- Do not restate the Sprint 2 plan.
+- Do not provide architecture commentary unless a genuine blocker or conflict is found.
+- Do not begin T5.1 or any AnalysingScreen work.
+- Do not add drag-and-drop.
+- Do not add capture="environment".
+- Do not add a fake “Checking…” or artificial in-flight state.
+- Do not call the analyse API from SubmitScreen.
+- Use one native file input only.
+- Do not nest interactive controls.
+- No any types.
+- Run the complete client test suite and client typecheck.
+- Commit all remaining SubmitScreen work in one commit.
+- Stop for review.
+
+Remaining SubmitScreen package requirements
+
+1. File validation
+
+Validate selected image files against the existing server contract:
+
+Supported MIME types:
+- image/jpeg
+- image/png
+- image/webp
+
+Maximum size:
+- 10 MB
+
+Prefer a shared exported constant for the maximum upload size if one already exists in the server/shared code.
+
+If no reusable shared constant exists, add one in the most appropriate shared schema/config file and update the relevant server validation to use it, avoiding duplicated magic numbers.
+
+When an invalid file is selected:
+
+Unsupported type:
+“This image type is not supported. Please choose a JPG, PNG or WebP image.”
+
+Oversized file:
+“This image is too large. Please choose a smaller image.”
+
+Requirements:
+- Reject the invalid file.
+- Do not pass it through the draft callback.
+- Do not display it as the selected file.
+- Associate the error with the native file input using aria-describedby.
+- Use role="alert" for immediate announcement.
+- Clear the file error after a valid file is subsequently selected.
+- Ensure reselecting the same invalid file still triggers validation by safely resetting the native input value when appropriate.
+
+2. Required-input validation
+
+The current disabled primary-button behaviour should remain:
+
+- Text mode: disabled when the message is blank or whitespace-only.
+- Image mode: disabled when no valid image is selected.
+
+Do not replace this with noisy validation-on-change.
+
+As a defensive safeguard, the submit handler must also refuse to invoke onSubmit if the active draft is invalid, even if called programmatically.
+
+No validation error should appear on the initial render.
+
+3. Selected-file interaction
+
+In image mode, after a valid file is selected, display:
+
+- selected filename
+- human-readable file size
+- a “Remove image” button
+
+“Remove image” must:
+
+- clear the selected file
+- clear the native file input
+- return the primary button to its disabled state
+- clear any related error
+- be keyboard accessible
+- have an accessible name that includes the filename, for example:
+  aria-label="Remove selected image: example.png"
+
+Do not make the entire upload area a button.
+
+Do not add custom keyboard handling to a non-interactive container.
+
+4. Draft callback integrity
+
+Text submission must call onSubmit with:
+
+{
+  mode: 'text',
+  text: string,
+  context: string
+}
+
+Image submission must call onSubmit with:
+
+{
+  mode: 'image',
+  file: File,
+  context: string
+}
+
+Requirements:
+- Trim only for validity checks.
+- Preserve the user’s entered text and context exactly in the callback unless the existing approved implementation intentionally normalises them.
+- Invalid drafts must never invoke onSubmit.
+- SubmitScreen must not make any API request.
+
+5. App integration
+
+Review App.tsx and ensure its temporary SubmitScreen callback:
+
+- accepts the typed SubmitDraft
+- stores or dispatches the submitted draft into the existing app state in the most appropriate typed way
+- does not call the API yet
+- does not create a fake loading state
+- does not begin AnalysingScreen work
+- includes a concise TODO only if genuinely needed for T5.3
+
+Because T4.1 used mode-specific drafts, do not force text and file into the same active submission.
+
+6. Accessibility
+
+Ensure:
+
+- both modes pass jest-axe
+- the image-error state passes jest-axe
+- the selected-image state passes jest-axe
+- all inputs retain programmatic labels
+- the optional context field remains clearly labelled
+- the character counter remains associated with the text field
+- file errors are associated using aria-describedby
+- visible focus styles use existing design tokens
+- buttons meet the existing minimum touch-target sizing
+- no hidden mode leaves focusable controls exposed
+- no horizontal overflow at mobile width
+
+7. Tests
+
+Expand the existing SubmitScreen test suite rather than replacing it.
+
+Retain all currently passing tests and add coverage for any missing behaviour, including:
+
+- unsupported MIME type is rejected
+- unsupported-type error text is exact
+- oversized image is rejected
+- oversized-image error text is exact
+- invalid files are not passed to onSubmit
+- invalid files are not displayed as selected
+- a valid file clears a previous file error
+- valid selected filename is displayed
+- human-readable selected file size is displayed
+- Remove image clears the file
+- Remove image disables the primary action again
+- Remove image has an accessible filename-specific label
+- defensive submit guard blocks an invalid text draft
+- defensive submit guard blocks an invalid image draft
+- valid text callback shape is exact
+- valid image callback shape is exact
+- no API request is made
+- axe check with file validation error visible
+- axe check with valid selected image visible
+- aria-describedby links the file error to the native input
+- mode switching does not leave hidden focusable controls in the DOM
+
+Use realistic File objects in tests.
+
+Do not rely only on filename extensions; validate the MIME type as required by the server contract.
+
+8. Verification
+
+Run:
+
+- complete client test suite
+- client tsc --noEmit
+
+Commit message:
+
+feat(screen): complete SubmitScreen validation and file handling
+
+Report only:
+
+1. Files changed
+2. Tests run and results
+3. Client typecheck result
+4. Commit hash
+5. Working-tree status
+
+Then stop and wait for approval.
