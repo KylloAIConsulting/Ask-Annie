@@ -11,6 +11,7 @@ import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen';
 import SubmitScreen from './screens/SubmitScreen/SubmitScreen';
 import type { SubmitDraft } from './screens/SubmitScreen/SubmitScreen';
 import AnalysingScreen from './screens/AnalysingScreen/AnalysingScreen';
+import ResultsScreen from './screens/ResultsScreen/ResultsScreen';
 import { analyseText, analyseImage } from './api/analyse';
 import type { AnnieResponse } from './types/annie';
 import { DEV_USE_FIXTURE, DEV_FIXTURE_LEVEL } from './lib/fixtureMode';
@@ -107,17 +108,12 @@ const App: React.FC = () => {
         );
 
       case 'results':
-        // TODO T6.1 — replace with <ResultsScreen result={state.analysisResult!} ... />
         return (
-          <div data-testid="screen-results">
-            <h1>Results</h1>
-            <p>T6.1 placeholder</p>
-            <button
-              onClick={() => dispatch({ type: 'RESET_SESSION' })}
-            >
-              Check another message (T6.1 placeholder)
-            </button>
-          </div>
+          <ResultsScreen
+            result={state.analysisResult!}
+            onFeedback={() => navigate('feedback')}
+            onReset={() => dispatch({ type: 'RESET_SESSION' })}
+          />
         );
 
       case 'feedback':

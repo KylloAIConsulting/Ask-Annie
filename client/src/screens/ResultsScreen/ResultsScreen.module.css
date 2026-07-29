@@ -1,0 +1,252 @@
+/* ── Screen shell ────────────────────────────────────────────────────────── */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+}
+
+/* ── Risk banner ─────────────────────────────────────────────────────────── */
+
+.riskBanner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: 12px;
+  border-left: 6px solid transparent; /* overridden by modifier classes below */
+}
+
+/* Risk level modifier — sets the banner's left-border and background tint */
+
+.riskBannerLower {
+  border-left-color: var(--color-risk-lower);
+  background-color: color-mix(in srgb, var(--color-risk-lower) 8%, transparent);
+}
+
+.riskBannerConcerning {
+  border-left-color: var(--color-risk-concerning);
+  background-color: color-mix(
+    in srgb,
+    var(--color-risk-concerning) 8%,
+    transparent
+  );
+}
+
+.riskBannerHigh {
+  border-left-color: var(--color-risk-high);
+  background-color: color-mix(in srgb, var(--color-risk-high) 8%, transparent);
+}
+
+/* ── Risk badge ──────────────────────────────────────────────────────────── */
+
+.riskBadge {
+  display: inline-block;
+  padding-block: 4px;
+  padding-inline: var(--space-3);
+  border-radius: 100px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-supporting);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  /* background-color set by modifier class */
+}
+
+.riskBadgeLower {
+  background-color: var(--color-risk-lower);
+}
+
+.riskBadgeConcerning {
+  background-color: var(--color-risk-concerning);
+}
+
+.riskBadgeHigh {
+  background-color: var(--color-risk-high);
+}
+
+/* ── Summary heading ─────────────────────────────────────────────────────── */
+
+.summary {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-page-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-heading);
+}
+
+/* ── Human review notice ─────────────────────────────────────────────────── */
+
+.humanReviewNotice {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background-color: color-mix(
+    in srgb,
+    var(--color-risk-concerning) 6%,
+    transparent
+  );
+  border: 1px solid var(--color-risk-concerning);
+  border-radius: 10px;
+}
+
+.humanReviewHeading {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-card-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-heading);
+}
+
+.humanReviewBody {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-body);
+}
+
+/* ── Sections container ──────────────────────────────────────────────────── */
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ── Individual section card ─────────────────────────────────────────────── */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: var(--card-border);
+  border-radius: 10px;
+  background-color: var(--color-white);
+}
+
+.section.emergencySection {
+  border-color: var(--color-risk-high);
+  background-color: color-mix(in srgb, var(--color-risk-high) 5%, transparent);
+}
+
+.sectionHeading {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-card-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-heading);
+}
+
+/* ── Body text ───────────────────────────────────────────────────────────── */
+
+.bodyText {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-body);
+}
+
+/* ── Bullet list ─────────────────────────────────────────────────────────── */
+
+.bulletList {
+  margin: 0;
+  padding-inline-start: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.bulletItem {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-body);
+}
+
+/* ── Privacy reminder ────────────────────────────────────────────────────── */
+
+.privacyReminder {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-supporting);
+  color: var(--color-slate);
+  line-height: var(--line-height-body);
+}
+
+/* ── Actions ─────────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block-start: var(--space-2);
+}
+
+/* Primary CTA — Leave feedback */
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  padding-inline: var(--space-5);
+  background-color: var(--color-annie-teal);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.1s ease;
+}
+
+.primaryButton:hover {
+  background-color: var(--color-deep-teal);
+}
+
+.primaryButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton {
+    transition: none;
+  }
+}
+
+/* Ghost CTA — Check another message */
+.resetButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  padding-inline: var(--space-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-annie-teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resetButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
