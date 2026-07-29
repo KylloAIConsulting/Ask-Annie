@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest';
 import { FeedbackRequestSchema, AnalyseTextSchema } from '../requestSchemas';
 
 describe('FeedbackRequestSchema', () => {

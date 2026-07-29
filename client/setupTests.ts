@@ -1,5 +1,3 @@
-import * as matchers from 'vitest-axe/matchers';
-import { expect } from 'vitest';
-
-// Extend vitest's expect with axe accessibility matchers (toHaveNoViolations)
-expect.extend(matchers);
+// Extends Jest's expect with toHaveNoViolations from jest-axe.
+// This import also augments TypeScript's Matchers interface.
+import 'jest-axe/extend-expect';

@@ -1,10 +1,12 @@
-import { describe, it, expect, beforeAll } from 'vitest';
 import request from 'supertest';
 import app from '../app';
 
-// Ensure mock AI is active for all route tests
 beforeAll(() => {
   process.env.USE_MOCK_AI = 'true';
+});
+
+afterAll(() => {
+  delete process.env.USE_MOCK_AI;
 });
 
 describe('GET /health', () => {
@@ -78,7 +80,6 @@ describe('POST /api/feedback', () => {
 
   it('includes rate limit headers (feedback endpoint is rate-limited)', async () => {
     const res = await request(app).post('/api/feedback').send({ answer: 'yes' });
-    // express-rate-limit v7 uses standard RateLimit-Limit header
     expect(res.headers['ratelimit-limit']).toBe('20');
   });
 });
