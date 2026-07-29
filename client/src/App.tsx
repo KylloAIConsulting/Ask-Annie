@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import {
   appReducer,
   initialAppState,
@@ -7,12 +7,14 @@ import {
 } from './state/appReducer';
 import Layout from './components/Layout/Layout';
 import Header from './components/Header/Header';
+import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen';
 
 // Re-export Screen so downstream modules can import from a single location.
 export type { Screen };
 
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(appReducer, initialAppState);
+  const [welcomePanelOpen, setWelcomePanelOpen] = useState(false);
 
   const navigate = (screen: Screen): void => {
     dispatch({ type: 'NAVIGATE', screen });
@@ -29,14 +31,12 @@ const App: React.FC = () => {
   const renderScreen = (): React.ReactElement => {
     switch (state.currentScreen) {
       case 'welcome':
-        // TODO T3.1 — replace with <WelcomeScreen onNavigate={navigate} />
         return (
-          <div data-testid="screen-welcome">
-            <h1>Ask Annie</h1>
-            <button onClick={() => navigate('submit')}>
-              Check a message (T3.1 placeholder)
-            </button>
-          </div>
+          <WelcomeScreen
+            onNavigate={navigate}
+            panelOpen={welcomePanelOpen}
+            onTogglePanel={() => setWelcomePanelOpen((v) => !v)}
+          />
         );
 
       case 'submit':
@@ -88,10 +88,13 @@ const App: React.FC = () => {
         <Header
           currentScreen={state.currentScreen}
           onNavigate={navigate}
-          // TODO T3.1 — replace with a callback that opens the explanation
-          // panel on the Welcome screen. The onHowItWorks prop contract is
-          // stable; only this callback changes.
-          onHowItWorks={() => navigate('welcome')}
+          // Navigates to the welcome screen and opens the explanation panel.
+          // Both state updates are batched by React 18, so WelcomeScreen
+          // renders once with panelOpen=true.
+          onHowItWorks={() => {
+            navigate('welcome');
+            setWelcomePanelOpen(true);
+          }}
         />
       }
     >
