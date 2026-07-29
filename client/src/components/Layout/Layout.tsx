@@ -4,6 +4,12 @@ import styles from './Layout.module.css';
 type LayoutProps = {
   /** Screen component rendered as the page body. */
   children: React.ReactNode;
+  /**
+   * Optional header rendered between the skip link and the main container.
+   * T1.3 passes <Header> here so the skip link remains the first focusable
+   * element in the document regardless of which component is in the header.
+   */
+  header?: React.ReactNode;
 };
 
 /**
@@ -16,12 +22,13 @@ type LayoutProps = {
  *
  * T1.3 will add <Header> above the container.
  */
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, header }) => {
   return (
     <>
       <a href="#main-content" className={styles.skipLink}>
         Skip to main content
       </a>
+      {header}
       <div className={styles.container}>
         <main id="main-content" className={styles.main}>
           {children}

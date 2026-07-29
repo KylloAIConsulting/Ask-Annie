@@ -1,0 +1,90 @@
+/* ── Header shell ────────────────────────────────────────────────────────── */
+
+.header {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-soft-grey);
+}
+
+/* Inner row: centres content and constrains width to match the journey
+   container so the wordmark aligns with page content on wide screens. */
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;           /* prevents overflow on narrow viewports */
+  gap: var(--space-2);
+  max-width: var(--max-width-journey);
+  margin-inline: auto;
+  padding-block: var(--space-3);
+  padding-inline: var(--page-padding);
+}
+
+/* ── Wordmark ────────────────────────────────────────────────────────────── */
+
+.wordmark {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-annie-teal);
+  letter-spacing: -0.01em;
+  user-select: none;
+  /* Minimum touch target height even though it is not interactive */
+  line-height: var(--button-height-min);
+}
+
+/* ── Navigation list ─────────────────────────────────────────────────────── */
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Navigation buttons ──────────────────────────────────────────────────── */
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);  /* 48 px — meets WCAG 2.5.5 target size */
+  padding-inline: var(--space-3);
+  background: none;
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-charcoal);
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+.navButton:hover {
+  color: var(--color-annie-teal);
+  background-color: color-mix(in srgb, var(--color-annie-teal) 8%, transparent);
+}
+
+/* Active page indicator — applied via aria-current="page" */
+.navButton[aria-current='page'] {
+  color: var(--color-annie-teal);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Focus ring — uses design-token colours, visible against any background */
+.navButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navButton {
+    transition: none;
+  }
+}

@@ -6,6 +6,7 @@ import {
   type AppAction,
 } from './state/appReducer';
 import Layout from './components/Layout/Layout';
+import Header from './components/Header/Header';
 
 // Re-export Screen so downstream modules can import from a single location.
 export type { Screen };
@@ -81,7 +82,22 @@ const App: React.FC = () => {
     }
   };
 
-  return <Layout>{renderScreen()}</Layout>;
+  return (
+    <Layout
+      header={
+        <Header
+          currentScreen={state.currentScreen}
+          onNavigate={navigate}
+          // TODO T3.1 — replace with a callback that opens the explanation
+          // panel on the Welcome screen. The onHowItWorks prop contract is
+          // stable; only this callback changes.
+          onHowItWorks={() => navigate('welcome')}
+        />
+      }
+    >
+      {renderScreen()}
+    </Layout>
+  );
 };
 
 // Exported for direct testing of the dispatch shape from App.test.tsx.
