@@ -8,6 +8,8 @@ import {
 import Layout from './components/Layout/Layout';
 import Header from './components/Header/Header';
 import WelcomeScreen from './screens/WelcomeScreen/WelcomeScreen';
+import SubmitScreen from './screens/SubmitScreen/SubmitScreen';
+import type { SubmitDraft } from './screens/SubmitScreen/SubmitScreen';
 
 // Re-export Screen so downstream modules can import from a single location.
 export type { Screen };
@@ -40,12 +42,13 @@ const App: React.FC = () => {
         );
 
       case 'submit':
-        // TODO T4.1 — replace with <SubmitScreen ... />
         return (
-          <div data-testid="screen-submit">
-            <h1>What would you like Annie to check?</h1>
-            <button onClick={() => navigate('welcome')}>Go back (T4.1 placeholder)</button>
-          </div>
+          <SubmitScreen
+            onNavigate={navigate}
+            onSubmit={(_draft: SubmitDraft) => {
+              // TODO T4.2 — dispatch SET_SUBMISSION and navigate to 'analysing'
+            }}
+          />
         );
 
       case 'analysing':

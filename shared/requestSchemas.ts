@@ -1,13 +1,19 @@
 import { z } from 'zod';
 
+/** Maximum character length for the message text field. */
+export const ANALYSE_TEXT_MAX_LENGTH = 10000;
+
+/** Maximum character length for the optional context field. */
+export const ANALYSE_CONTEXT_MAX_LENGTH = 500;
+
 /**
  * Request schema for POST /api/analyse.
  * Text and image are both optional individually — the route handler
  * enforces that at least one must be present (image arrives via multipart).
  */
 export const AnalyseTextSchema = z.object({
-  text: z.string().min(1).max(10000).optional(),
-  context: z.string().max(500).optional(),
+  text: z.string().min(1).max(ANALYSE_TEXT_MAX_LENGTH).optional(),
+  context: z.string().max(ANALYSE_CONTEXT_MAX_LENGTH).optional(),
 });
 
 export type AnalyseText = z.infer<typeof AnalyseTextSchema>;

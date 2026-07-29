@@ -36,10 +36,10 @@ describe('App', () => {
     expect(screen.queryByTestId('screen-welcome')).toBeNull();
   });
 
-  it('navigates back to the welcome screen slot from the submit slot', async () => {
+  it('navigates back to the welcome screen from the submit screen', async () => {
     render(<App />);
-    await userEvent.click(screen.getByText(/Check a message/i));
-    await userEvent.click(screen.getByText(/Go back/i));
+    await userEvent.click(screen.getByRole('button', { name: /Check a message/i }));
+    await userEvent.click(screen.getByRole('button', { name: 'Back' }));
     expect(screen.getByTestId('screen-welcome')).toBeTruthy();
   });
 });
