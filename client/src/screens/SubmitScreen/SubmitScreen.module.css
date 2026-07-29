@@ -148,14 +148,63 @@
   border-radius: 2px;
 }
 
-/* ── Selected filename ───────────────────────────────────────────────────── */
+/* ── File error ──────────────────────────────────────────────────────────── */
+
+.fileError {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-supporting);
+  color: var(--color-high-risk); /* design-token red */
+}
+
+/* ── Selected file info ──────────────────────────────────────────────────── */
+
+.fileInfo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
 
 .filename {
   margin: 0;
   font-family: var(--font-family);
   font-size: var(--font-size-supporting);
-  color: var(--color-slate);
+  color: var(--color-charcoal);
   word-break: break-all; /* prevent long filenames from overflowing */
+}
+
+.fileSize {
+  color: var(--color-slate);
+}
+
+/* ── Remove image button ─────────────────────────────────────────────────── */
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  padding-inline: var(--space-3);
+  background: none;
+  border: 1px solid var(--color-soft-grey);
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-supporting);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-slate);
+}
+
+.removeButton:hover {
+  border-color: var(--color-charcoal);
+  color: var(--color-charcoal);
+}
+
+.removeButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+  border-radius: var(--button-border-radius);
 }
 
 /* ── Actions ─────────────────────────────────────────────────────────────── */

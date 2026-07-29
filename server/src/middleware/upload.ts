@@ -1,8 +1,10 @@
 import multer from 'multer';
 import { Request } from 'express';
 import { createError } from './errorHandler';
-
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+import {
+  UPLOAD_MAX_FILE_SIZE,
+  UPLOAD_ALLOWED_MIME_TYPES,
+} from '@shared/uploadConfig';
 
 /**
  * MIME types accepted by the browser-side file picker filter.
@@ -10,12 +12,12 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
  * Sprint 3: replaced by decoded file signature validation via sharp,
  *           which accepts a valid JPEG/PNG/WebP regardless of filename or browser MIME type.
  */
-const ALLOWED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+const ALLOWED_MIME_TYPES = new Set<string>(UPLOAD_ALLOWED_MIME_TYPES);
 
 export const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: MAX_FILE_SIZE,
+    fileSize: UPLOAD_MAX_FILE_SIZE,
     files: 1,
   },
   fileFilter: (_req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {

@@ -45,8 +45,14 @@ const App: React.FC = () => {
         return (
           <SubmitScreen
             onNavigate={navigate}
-            onSubmit={(_draft: SubmitDraft) => {
-              // TODO T4.2 — dispatch SET_SUBMISSION and navigate to 'analysing'
+            onSubmit={(draft: SubmitDraft) => {
+              dispatch({
+                type: 'SET_SUBMISSION',
+                text: draft.mode === 'text' ? draft.text : '',
+                file: draft.mode === 'image' ? draft.file : null,
+                context: draft.context,
+              });
+              navigate('analysing'); // TODO T5.3 — replace placeholder with <AnalysingScreen>
             }}
           />
         );
