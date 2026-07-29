@@ -5,6 +5,7 @@ import {
   type Screen,
   type AppAction,
 } from './state/appReducer';
+import Layout from './components/Layout/Layout';
 
 // Re-export Screen so downstream modules can import from a single location.
 export type { Screen };
@@ -80,7 +81,7 @@ const App: React.FC = () => {
     }
   };
 
-  return <main>{renderScreen()}</main>;
+  return <Layout>{renderScreen()}</Layout>;
 };
 
 // Exported for direct testing of the dispatch shape from App.test.tsx.

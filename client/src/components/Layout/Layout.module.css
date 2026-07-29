@@ -1,0 +1,66 @@
+/* ── Skip-to-content link ────────────────────────────────────────────────── */
+
+/*
+ * The link is positioned above the viewport via transform so it does not
+ * affect document flow. It becomes visible when it receives keyboard focus,
+ * then slides back out when focus moves elsewhere.
+ *
+ * :focus is used rather than :focus-visible so the link always appears when
+ * focused, regardless of input method — the correct behaviour for a skip link.
+ */
+.skipLink {
+  position: fixed;
+  top: var(--space-2);      /* 8 px from the top of the viewport */
+  left: var(--space-2);     /* 8 px from the left */
+  z-index: 9999;
+
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-annie-teal);
+  color: var(--color-white);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  text-decoration: none;
+  border-radius: var(--button-border-radius);
+
+  /* Hidden above the viewport until focused */
+  transform: translateY(calc(-100% - var(--space-3)));
+  transition: transform 0.15s ease;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skipLink {
+    transition: none;
+  }
+}
+
+/* ── Page container ──────────────────────────────────────────────────────── */
+
+/*
+ * Centres the user journey at max-width 720 px.
+ * Horizontal padding is supplied by --page-padding, which the tokens layer
+ * already updates at tablet (768 px) and desktop (1024 px) breakpoints via
+ * media queries on :root. No additional breakpoints are needed here.
+ */
+.container {
+  max-width: var(--max-width-journey); /* 720 px */
+  margin-inline: auto;
+  padding-inline: var(--page-padding); /* 16 px → 24 px → 32 px */
+}
+
+/* ── Main landmark ───────────────────────────────────────────────────────── */
+
+/*
+ * The <main> element itself carries no additional spacing; screens own their
+ * own vertical rhythm via padding-block on the screen root element.
+ */
+.main {
+  /* intentionally empty — screens control their own vertical spacing */
+}
