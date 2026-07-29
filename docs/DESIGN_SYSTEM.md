@@ -242,7 +242,7 @@ Weight: 700
 ```text
 24px
 Line height: 1.3
-Weight: 650
+Weight: 600
 ```
 
 ## Card Heading
@@ -250,8 +250,10 @@ Weight: 650
 ```text
 20px
 Line height: 1.35
-Weight: 650
+Weight: 600
 ```
+
+> **Font weight note:** CSS supports numeric font-weight values including values such as 650. This project uses 600 as its chosen semibold token, represented by `--font-weight-semibold` in `tokens.css`. Earlier versions of this document specified 650; that value has been updated to 600 throughout.
 
 ## Body Large
 

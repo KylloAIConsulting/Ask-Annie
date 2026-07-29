@@ -74,15 +74,8 @@ Users can:
 
 Receive:
 
-- Risk rating
-
-Green
-
-Amber
-
-Red
-
-Plain English explanation
+- Risk level: Lower Risk, Concerning, or High Risk
+- Plain English explanation
 
 Recommended next steps
 

@@ -16,7 +16,7 @@
   /* ── Typography ─────────────────────────────────────────────────────────── */
   --font-family: 'Inter', Arial, Helvetica, sans-serif;
   --font-weight-regular: 400;
-  --font-weight-semibold: 600; /* 650 is not used — 600 is the correct SemiBold */
+  --font-weight-semibold: 600; /* Chosen semibold weight for this project. The design system originally specified 650; this project adopts 600. Both are valid CSS numeric values. */
   --font-weight-bold: 700;
 
   /* Type scale — mobile-first, desktop values via clamp() */
