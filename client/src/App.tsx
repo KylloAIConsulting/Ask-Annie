@@ -12,6 +12,7 @@ import SubmitScreen from './screens/SubmitScreen/SubmitScreen';
 import type { SubmitDraft } from './screens/SubmitScreen/SubmitScreen';
 import AnalysingScreen from './screens/AnalysingScreen/AnalysingScreen';
 import ResultsScreen from './screens/ResultsScreen/ResultsScreen';
+import FeedbackScreen from './screens/FeedbackScreen/FeedbackScreen';
 import { analyseText, analyseImage } from './api/analyse';
 import type { AnnieResponse } from './types/annie';
 import { DEV_USE_FIXTURE, DEV_FIXTURE_LEVEL } from './lib/fixtureMode';
@@ -117,12 +118,10 @@ const App: React.FC = () => {
         );
 
       case 'feedback':
-        // TODO T7.1 — replace with <FeedbackScreen onNavigate={navigate} onReset={...} />
         return (
-          <div data-testid="screen-feedback">
-            <h1>Did Annie help you decide what to do?</h1>
-            <p>T7.1 placeholder</p>
-          </div>
+          <FeedbackScreen
+            onDone={() => dispatch({ type: 'RESET_SESSION' })}
+          />
         );
     }
   };

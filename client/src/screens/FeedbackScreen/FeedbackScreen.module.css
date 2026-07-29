@@ -1,0 +1,349 @@
+/* ── Screen shell ────────────────────────────────────────────────────────── */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-block: var(--space-5);
+}
+
+/* ── Intro ───────────────────────────────────────────────────────────────── */
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-page-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-heading);
+}
+
+.supporting {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-slate);
+  line-height: var(--line-height-body);
+}
+
+/* ── Answer group (fieldset) ─────────────────────────────────────────────── */
+
+.answerGroup {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.answerLegend {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-charcoal);
+  margin-block-end: var(--space-2);
+  padding: 0;
+  float: left; /* classic fieldset legend reset */
+  width: 100%;
+}
+
+.answerOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  clear: both;
+}
+
+/* Each answer option is a visible toggle button backed by a hidden radio. */
+
+.answerLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  min-width: 120px;
+  padding-inline: var(--space-4);
+  border: 2px solid var(--color-soft-grey);
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-charcoal);
+  background-color: var(--color-white);
+  /* No max-height transition — avoids the transition-to-auto pitfall. */
+  transition: border-color 0.1s ease, background-color 0.1s ease;
+  gap: var(--space-2);
+}
+
+.answerLabel:hover {
+  border-color: var(--color-annie-teal);
+}
+
+.answerLabelSelected {
+  border-color: var(--color-annie-teal);
+  background-color: color-mix(
+    in srgb,
+    var(--color-annie-teal) 8%,
+    transparent
+  );
+  color: var(--color-annie-teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .answerLabel {
+    transition: none;
+  }
+}
+
+/* Visually hide the radio but keep it in the accessibility tree.
+   The label itself provides the click target and visual affordance. */
+.answerRadio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* When the underlying radio is focused (keyboard navigation), ring the label. */
+.answerRadio:focus-visible + *,
+.answerLabel:has(.answerRadio:focus-visible) {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+  border-radius: var(--button-border-radius);
+}
+
+/* ── Field group (written feedback) ─────────────────────────────────────── */
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fieldLabel {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-charcoal);
+}
+
+.optional {
+  font-weight: var(--font-weight-regular);
+  color: var(--color-slate);
+}
+
+.textarea {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-charcoal);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-soft-grey);
+  border-radius: 6px;
+  padding: var(--space-3);
+  line-height: var(--line-height-body);
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.textarea:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+  border-color: var(--color-annie-teal);
+}
+
+.textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  resize: none;
+}
+
+.charCount {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-supporting);
+  color: var(--color-slate);
+  text-align: right;
+}
+
+/* ── Outcome group (fieldset) ────────────────────────────────────────────── */
+
+.outcomeGroup {
+  border: var(--card-border);
+  border-radius: 10px;
+  padding: var(--space-4);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.outcomeLegend {
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-charcoal);
+  padding-inline: var(--space-1);
+}
+
+.outcomeOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.outcomeLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-charcoal);
+  min-height: var(--button-height-min);
+}
+
+.outcomeRadio {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-annie-teal);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.outcomeRadio:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+}
+
+/* ── Actions ─────────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Primary CTA — Send feedback */
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  padding-inline: var(--space-5);
+  background-color: var(--color-annie-teal);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.1s ease;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background-color: var(--color-deep-teal);
+}
+
+.primaryButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 3px;
+}
+
+.primaryButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton {
+    transition: none;
+  }
+}
+
+/* Ghost CTA — Skip / secondary actions */
+.skipButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-min);
+  padding-inline: var(--space-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-annie-teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.skipButton:focus-visible {
+  outline: 3px solid var(--color-annie-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skipButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Error state ─────────────────────────────────────────────────────────── */
+
+.errorContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.errorMessage {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-body);
+}
+
+/* ── Confirmation (success) state ────────────────────────────────────────── */
+
+.confirmationContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+}
+
+.confirmationHeading {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-page-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-charcoal);
+  line-height: var(--line-height-heading);
+  /* Suppress the default focus ring on programmatically focused headings.
+     A visible ring here would confuse sighted users who did not use the keyboard. */
+  outline: none;
+}
+
+.confirmationBody {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-large);
+  color: var(--color-slate);
+  line-height: var(--line-height-body);
+}
