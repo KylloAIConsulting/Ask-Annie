@@ -1,0 +1,93 @@
+T1.3 is approved.
+
+Proceed with T2.1 only.
+
+Keep this task credit-efficient:
+- Do not restate the Sprint 2 plan.
+- Do not provide architecture commentary unless a blocker is found.
+- Do not begin T2.2, T3.1, or any other task.
+- Make only the changes required for T2.1.
+- Run the relevant tests.
+- Run the client typecheck.
+- Commit the work.
+- Stop.
+
+T2.1 scope:
+
+Create the typed API client for analysis and feedback.
+
+Add:
+- client/src/api/errors.ts
+- client/src/api/analyse.ts
+- client/src/api/feedback.ts
+- client/src/api/index.ts
+- client/src/__tests__/api.test.ts
+
+Requirements:
+
+ApiError
+- Extend Error.
+- Include status: number.
+- Include code: string.
+- Preserve the original error message.
+- No any types.
+
+analyseText
+- Accept text: string.
+- Accept optional context: string.
+- Accept optional AbortSignal.
+- POST JSON to /api/analyse.
+- Validate successful responses with AnnieResponseSchema.
+- Throw ApiError for non-2xx responses.
+- Do not convert AbortError into ApiError.
+
+analyseImage
+- Accept file: File.
+- Accept optional context: string.
+- Accept optional AbortSignal.
+- POST multipart/form-data to /api/analyse.
+- Do not set the Content-Type header manually.
+- Validate successful responses with AnnieResponseSchema.
+- Throw ApiError for non-2xx responses.
+- Do not convert AbortError into ApiError.
+
+submitFeedback
+- Accept a payload conforming to the shared feedback request schema/type.
+- POST JSON to /api/feedback.
+- Throw ApiError for non-2xx responses.
+- Return void on success.
+
+Error handling
+- Safely handle non-JSON error responses.
+- Extract a server-provided error code/message when available.
+- Use a stable fallback code and message when the response body cannot be parsed.
+- Schema validation failures on successful responses must remain distinguishable from ApiError.
+- Do not swallow network errors.
+
+Tests must cover:
+- analyseText success with valid AnnieResponse
+- analyseImage success with valid AnnieResponse
+- submitFeedback success
+- non-2xx JSON error response
+- non-2xx non-JSON response
+- successful response with invalid AnnieResponse schema
+- multipart request does not manually set Content-Type
+- AbortError remains AbortError
+- network failure propagates
+- AbortSignal is passed through to fetch
+
+Use the existing shared Zod schemas and types. Do not duplicate request or response contracts.
+
+Commit message:
+
+feat(api): add typed API client for analyse and feedback endpoints
+
+Report only:
+
+1. Files changed
+2. Tests run and results
+3. Client typecheck result
+4. Commit hash
+5. Working-tree status
+
+Then stop and wait for approval.
