@@ -1,0 +1,123 @@
+T3.1 is approved.
+
+Proceed with T4.1 only.
+
+Keep this task credit-efficient:
+- Do not restate the Sprint 2 plan.
+- Do not provide architecture commentary unless a blocker is found.
+- Do not begin T4.2, T4.3, T5.1, or any other task.
+- Make only the changes required for T4.1.
+- Run the relevant tests.
+- Run the client typecheck.
+- Commit the work.
+- Stop.
+
+T4.1 scope:
+
+Create the SubmitScreen shell with the text and image input modes, but do not submit to the API yet.
+
+Add:
+- client/src/screens/SubmitScreen/SubmitScreen.tsx
+- client/src/screens/SubmitScreen/SubmitScreen.module.css
+- client/src/__tests__/SubmitScreen.test.tsx
+
+Modify:
+- client/src/App.tsx
+
+Requirements:
+
+Screen content
+- Heading:
+  “What would you like Annie to check?”
+- Supporting text:
+  “Paste the message or upload a screenshot. Remove personal details where possible.”
+
+Input modes
+- Provide two clearly labelled mode controls:
+  - “Paste message”
+  - “Upload screenshot”
+- Use an accessible pattern such as:
+  - a radiogroup with radio controls, or
+  - buttons with clear pressed-state semantics
+- Do not use inaccessible tab semantics unless the complete tab pattern is implemented
+- Default mode: text
+
+Text mode
+- Label:
+  “Message to check”
+- Multiline textarea
+- Character counter
+- Maximum length must come from the existing shared request schema or a single shared constant already used by that schema
+- Do not duplicate a magic-number limit
+- Optional context field labelled:
+  “Anything else Annie should know? (optional)”
+
+Image mode
+- Label:
+  “Upload a screenshot”
+- Accept common image file types supported by the server contract
+- Use one native file input
+- Do not nest interactive controls
+- Do not use the capture attribute
+- Show the selected filename after a file is chosen
+- Optional context field labelled:
+  “Anything else Annie should know? (optional)”
+
+Actions
+- Primary button:
+  “Check with Annie”
+- Secondary button:
+  “Back”
+- Back calls onNavigate('welcome')
+- Primary action must not call the API in this task
+- Primary action should invoke an explicit callback prop with the current typed draft data
+- The parent App may temporarily receive the callback without starting analysis, with a TODO for the later submission task
+- Disable the primary action when:
+  - text mode has no non-whitespace message, or
+  - image mode has no selected file
+- Do not add a fake loading or “Checking...” state
+
+State and types
+- Define a typed discriminated union for the submission draft:
+  - text mode draft
+  - image mode draft
+- Export the draft type only if App or later tasks need it
+- No any types
+
+Accessibility
+- Every field has a programmatic label
+- Mode controls are keyboard accessible
+- Validation/disabled state is understandable without colour alone
+- Visible focus styles use existing tokens
+- Screen passes jest-axe in both modes
+- No mobile horizontal overflow
+
+Tests must cover:
+- renders in text mode by default
+- text-mode accessibility
+- image-mode accessibility
+- switching between modes
+- Back calls onNavigate('welcome')
+- primary button disabled for blank text
+- primary button enabled for non-whitespace text
+- primary button disabled when no image is selected
+- selected filename is displayed
+- text draft callback contains mode, text, and context
+- image draft callback contains mode, file, and context
+- character counter updates
+- text length is constrained by the shared limit
+- no API request is made by this component
+
+Commit message:
+
+feat(screen): add SubmitScreen input modes and draft handling
+
+Report only:
+
+1. Files changed
+2. Tests run and results
+3. Client typecheck result
+4. Commit hash
+5. Working-tree status
+
+Then stop and wait for approval.
