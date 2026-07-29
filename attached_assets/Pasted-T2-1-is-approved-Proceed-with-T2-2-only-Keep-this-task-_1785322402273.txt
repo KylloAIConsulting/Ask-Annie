@@ -1,0 +1,96 @@
+T2.1 is approved.
+
+Proceed with T2.2 only.
+
+Keep this task credit-efficient:
+- Do not restate the Sprint 2 plan.
+- Do not provide architecture commentary unless a blocker is found.
+- Do not begin T3.1 or any other task.
+- Make only the changes required for T2.2.
+- Run the relevant tests.
+- Run the client typecheck.
+- Commit the work.
+- Stop.
+
+T2.2 scope:
+
+Create a development-only fixture module for all three Annie risk levels.
+
+Add:
+- client/src/api/fixture.ts
+- client/src/__tests__/fixture.test.ts
+
+Modify:
+- .env.example
+
+Requirements:
+
+Fixture data
+- Export one complete AnnieResponse fixture for each risk level:
+  - LOWER_RISK
+  - CONCERNING
+  - HIGH_RISK
+- All fixtures must use realistic but clearly fictional content.
+- HIGH_RISK must include:
+  - non-empty emergencyAdvice
+  - requiresHumanReview: true
+- CONCERNING must include:
+  - non-empty thingsToAvoid
+- LOWER_RISK must demonstrate the absence of optional conditional sections where appropriate.
+- Validate every fixture with AnnieResponseSchema at module load.
+- Do not duplicate the AnnieResponse type or risk-level enum.
+
+Selection
+- Export a typed fixture selector.
+- Accept only valid risk-level values.
+- Default to LOWER_RISK when no valid development fixture level is supplied.
+- Do not use any types.
+
+Async helper
+- Export a helper that resolves a selected fixture after a configurable delay.
+- Default delay: 1500 ms.
+- Support an optional AbortSignal.
+- If aborted before or during the delay, reject with a DOMException whose name is AbortError.
+- Clear the timer when aborted or resolved.
+
+Environment documentation
+Add development-only variables to .env.example:
+- VITE_USE_FIXTURE=false
+- VITE_FIXTURE_RISK_LEVEL=LOWER_RISK
+
+Explain briefly that:
+- fixture mode is for local development only
+- valid risk levels are LOWER_RISK, CONCERNING, HIGH_RISK
+- production must use the real API
+
+Important:
+- Do not integrate fixture mode into AnalysingScreen yet.
+- Do not statically wire fixture mode into App.
+- T5.3 will perform the development-only dynamic import and enforce:
+  import.meta.env.DEV && VITE_USE_FIXTURE === 'true'
+
+Tests must cover:
+- all three fixtures parse against AnnieResponseSchema
+- each fixture has the correct risk level
+- HIGH_RISK contains emergencyAdvice and requiresHumanReview: true
+- CONCERNING contains thingsToAvoid
+- LOWER_RISK omits the relevant conditional content
+- valid selector returns the correct fixture
+- missing or invalid selector input defaults to LOWER_RISK
+- async helper resolves after the requested delay
+- async helper rejects with AbortError when cancelled before resolution
+- no unresolved timers remain after abort
+
+Commit message:
+
+feat(api): add development fixtures for all risk levels
+
+Report only:
+
+1. Files changed
+2. Tests run and results
+3. Client typecheck result
+4. Commit hash
+5. Working-tree status
+
+Then stop and wait for approval.
